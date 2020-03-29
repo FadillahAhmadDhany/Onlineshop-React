@@ -15,6 +15,7 @@ class Order extends Component {
       id_user: "",
       total: "",
       bukti_bayar: "",
+      alamat:"",
       status: "",
       action: "",
       find: "",
@@ -37,6 +38,32 @@ class Order extends Component {
       .catch(error => {
         console.log(error);
       });
+    }
+
+    Accept = (id) => {
+      if(window.confirm("APakah anda yakin mengkonfirmasi order ini?")){
+        let url = "http://localhost/eproduk/public/order/accept/"+id;
+        axios.post(url)
+        .then(response => {
+          this.get_order();
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      }
+    }
+    
+    Decline = (id) => {
+      if(window.confirm("APakah anda yakin mengkonfirmasi order ini?")){
+        let url = "http://localhost/eproduk/public/order/decline/"+id;
+        axios.post(url)
+        .then(response => {
+          this.get_order();
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      }
     }
 
     componentDidMount = () => {
@@ -115,9 +142,9 @@ class Order extends Component {
                     <tbody>
                       { this.state.order.map((item) => {
                         return(
-                          <tr key={item.id}>
+                          <tr key={item.id_order}>
                             <td>{item.id_order}</td>
-                            <td>{item.id_pengiriman}</td>
+                            <td>{item.alamat}</td>
                             <td>{item.nama_user}</td>
                             <td>{item.total}</td>
                             <td>{item.bukti_bayar}</td>
@@ -126,7 +153,7 @@ class Order extends Component {
                               {item.detail.map((it) => {
                                   return(
                                     
-                                    <li className="d-flex justify-content-between align-items-center" key={it.kode_produk}>{it.nama_produk} <span className="badge badge-dark badge-pill">{it.quantity}</span></li>
+                                    <li className="d-flex justify-content-between align-items-center" key={it.kode_produk}>{it.nama_produk} <span className="badge badge-light badge-pill">{it.quantity}</span></li>
                                     
                                   )
                               })}
@@ -134,11 +161,11 @@ class Order extends Component {
                             </td>
                             <td>{item.status}</td>
                             <td>
-                              <Link className="m-1 btn btn-sm btn-outline-success" onClick={() => this.Edit(item)}>
+                              <Link className="m-1 btn btn-sm btn-outline-success" onClick={() => this.Accept(item.id_order)}>
                                 Terima
                               </Link>
                               <Link className="m-1 btn btn-sm btn-outline-danger"
-                                onClick={() => this.Drop(item.id)}>
+                                onClick={() => this.Decline(item.id_order)}>
                                 Tolak
                               </Link>
                               </td>

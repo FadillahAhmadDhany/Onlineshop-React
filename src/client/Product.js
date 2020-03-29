@@ -3,6 +3,9 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Slide1 from '../image/Slide1.jpg';
 import Slide2 from '../image/Slide2.jpg';
+import Slide3 from '../image/Slide3.jpg';
+import Slide4 from '../image/Slide4.jpg';
+import Slide5 from '../image/Slide5.jpg';
 import ProductItem from './ProductItem';
 
 export default class Product extends React.Component {
@@ -72,34 +75,36 @@ export default class Product extends React.Component {
                             <div className="form-group">
                                 <select className="form-control" name="filter" value={this.state.value} onChange={this.bind} >
                                     <option value="">Choose...</option>
-                                    <option value="sepatu">Sepatu</option>
-                                    <option value="topi">Topi</option>
-                                    <option value="kaos">Kaos</option>
+                                    <option value="sepatu">Weapon</option>
+                                    <option value="topi">Arena</option>
+                                    <option value="kaos">Monster</option>
                                 </select>
                             </div>
-                            <button type="submit" className="btn btn-info pull-right m-2">
+                            <button type="submit" className="btn btn-outline-primary pull-right m-2">
                                 Filter
                             </button>
-                        </form>
-                        <br/>
-                        <br/>
-                        <br/>
-                            <Link to="/check_out">
-                                <button className="btn btn-success float-right">
-                                    <span className="fa fa-check"></span> Checkout
-                            </button>
-                            </Link>
                             <Link to="/cart">
-                                <button className="btn btn-primary float-right" style={{ marginRight: "10px" }}>
+                                <button className="btn btn-outline-success pull-right m-2">
                                     <span className="fa fa-cart-plus"></span> View Cart
                             </button>
                             </Link>
+                        </form>
+                    
+                            {/* <Link to="/check_out">
+                                <button className="btn btn-outline-success float-right">
+                                    <span className="fa fa-check"></span> Checkout
+                            </button>
+                            </Link> */}
+                            
                     </div>
                     <div className="col-lg-9">
                         <div id="slideshow" className="carousel slide my-4" data-ride="carousel">
                             <ol className="carousel-indicators">
                                 <li data-target="#slideshow" data-slide-to="0" className="active"></li>
                                 <li data-target="#slideshow" data-slide-to="1"></li>
+                                <li data-target="#slideshow" data-slide-to="2"></li>
+                                <li data-target="#slideshow" data-slide-to="3"></li>
+                                <li data-target="#slideshow" data-slide-to="4"></li>
                             </ol>
                             <div className="carousel-inner" role="listbox">
                                 <div className="carousel-item active">
@@ -107,6 +112,15 @@ export default class Product extends React.Component {
                                 </div>
                                 <div className="carousel-item">
                                     <img className="d-block img-fluid" src={Slide2} alt="Second slide" />
+                                </div>
+                                <div className="carousel-item">
+                                    <img className="d-block img-fluid" src={Slide3} alt="Second slide" />
+                                </div>
+                                <div className="carousel-item">
+                                    <img className="d-block img-fluid" src={Slide4} alt="Second slide" />
+                                </div>
+                                <div className="carousel-item">
+                                    <img className="d-block img-fluid" src={Slide5} alt="Second slide" />
                                 </div>
                             </div>
                             <a className="carousel-control-prev" href="#slideshow" role="button" data-slide="prev">

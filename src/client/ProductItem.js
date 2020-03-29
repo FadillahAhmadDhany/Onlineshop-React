@@ -54,7 +54,7 @@ export default class ProductItem extends React.Component {
                         </span>
                         { item.jmlh_brg > 0 ?
                         <div>
-                        <button className="btn btn-sm btn-warning" 
+                        <button className="btn btn-sm btn-outline-dark" 
                             onClick={() =>this.addToCart(item)}>Add to cart</button>
                         <input type="number" value={this.state.quantity} name="quantity" 
                             onChange={this.bind} className="float-right" 

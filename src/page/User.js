@@ -153,7 +153,7 @@ class User extends Component {
             <div className="#">
               <div className="row">
                 <div className="col">
-                  <h4 className="#" style={{fontWeight:"600", textAlign:"center", fontSize:"35px"}} >Data User</h4>
+                  <h4 className="text-secondary" style={{fontWeight:"600", textAlign:"center", fontSize:"35px"}} >Data User</h4>
                 </div>
               </div>
               <div className="col-sm-3">

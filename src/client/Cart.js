@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
 import $ from "jquery";
-import { Link } from 'react-router-dom'
 import axios from "axios";
 
 export default class Cart extends React.Component {
@@ -10,8 +9,12 @@ export default class Cart extends React.Component {
     this.state = {
       carts: [],
       data_pengiriman: [],
+      order:[],
+      id_user:"",
+      id_pengiriman:"",
       num: 0,
       total: 0,
+      message:""
     }    
     
     if(!localStorage.getItem("Token")){
@@ -33,6 +36,7 @@ get_alamat = () => {
   .then(response => {
     this.setState({
       data_pengiriman: response.data.data_pengiriman,
+      id_pengiriman: response.data.data_pengiriman.id_pengiriman,
     });
     $("#loading").toast("hide");
   })
@@ -73,6 +77,45 @@ clearCart = () => {
     localStorage.removeItem('cart');
     this.setState({carts: []});    
 }
+
+
+
+get_order = () => {
+  // $("#loading").toast("show");
+  let url = "http://localhost/eproduk/public/order";
+  axios.get(url)
+  .then(response => {
+    this.setState({order: response.data.order});
+    // $("#loading").toast("hide");
+  })
+  .catch(error => {
+    console.log(error);
+  });
+}
+
+Order = (e) => {
+  let id = JSON.parse(localStorage.getItem('id_user'))
+  e.preventDefault()  
+  let url = "http://localhost/eproduk/public/order/save"
+  let form = new FormData()
+  form.append("id_user", id)
+  form.append("id_pengiriman", this.state.id_pengiriman)
+  form.append("total", this.state.total)
+  form.append("carts", JSON.stringify(this.state.carts))
+
+  axios.post(url, form)
+       .then(res => {
+          alert("Order Berhasil")
+          this.setState({message: res.data.message})
+          localStorage.removeItem('cart')
+          this.getCarts()
+        })
+        .catch(error => {
+              console.log(error);
+        })  
+}
+
+
  
       render(){
         const { carts, num, total, data_pengiriman } =  this.state;
@@ -112,16 +155,17 @@ clearCart = () => {
 
                   <div>
                   {carts.map((product, index) =>    
-                  <li className="list-group-item d-flex justify-content-between lh-condensed" key={index}>
+                  <ul className="list-group list-group-horizontal-md">
+                  <li className="list-group-item d-flex n" key={index}>
                   <div>
                     <h6 className="my-0">{product.name}</h6>
                     <small className="text-muted">Harga: Rp{product.price}, Jumlah produk: {product.qty} </small>
                   </div>
                   <span className="text-muted">Rp. {product.total}</span>
-                  <button className="btn btn-sm btn-warning" 
-                  onClick={() => this.removeFromCart(product)}><span className="fa fa-trash"></span> Remove</button>
+                  <button className="btn btn-sm btn-outline-warning " 
+                  onClick={() => this.removeFromCart(product)}><span className="fa fa-trash"></span>Remove</button>
                 </li>
-                
+                </ul>
 
             )
           }
@@ -131,7 +175,7 @@ clearCart = () => {
         { !carts.length ? "" :
           
             <li className="list-group-item d-flex n">
-              <button className="btn btn-block btn-danger float-right" onClick={this.clearCart} 
+              <button className="btn btn-block btn-outline-danger float-right" onClick={this.clearCart} 
                 style={{ marginRight: "10px" }}><span className="fa fa-trash"></span> Clear Cart</button>
             </li>
                   }
@@ -158,15 +202,17 @@ clearCart = () => {
                   </form>
                 </div>
                 <div className="col-md-8 order-md-1">
-                  <h4 className="mb-3">Billing address</h4>
-                  <form className="needs-validation" noValidate>
+                  <h4 className="mb-3">Alamat Pengiriman</h4>
+
+                  <form className="needs-validation" onSubmit={this.Order} >
                    
                     <div className="col-md-4 mb-3">
                         <label htmlFor="state">Alamat</label>                  
-                      <select className="form-control" name="role" value={this.state.value} onChange={this.bind} required>
+                      <select className="form-control" name="id_pengiriman" value={this.state.id_pengiriman} onChange={this.bind} required>
+                        <option>Select</option>
                       {this.state.data_pengiriman.map((item) => {
                     return(
-                      <option value="{item.id}">{item.judul}</option>
+                      <option value={item.id_pengiriman}>{item.judul}</option>
                       )})}
                     </select>
                         
@@ -175,32 +221,19 @@ clearCart = () => {
                         </div>
                       </div>
                     <hr className="mb-4" />
-                    <button className="btn btn-primary btn-lg btn-block" type="submit">
-                      Continue to checkout
+                    <button className="btn btn-outline-success btn-lg btn-block" type="submit" >
+                      Continue to Payment
                     </button>
                   </form>
+
                 </div>
               </div>
-              <footer className="my-5 pt-5 text-muted text-center text-small">
-                <p className="mb-1">© 2017-2018 React Shop © Dhragonite.Com</p>
-                <ul className="list-inline">
-                  <li className="list-inline-item">
-                    <a href="#">Privacy</a>
-                  </li>
-                  <li className="list-inline-item">
-                    <a href="#">Terms</a>
-                  </li>
-                  <li className="list-inline-item">
-                    <a href="#">Support</a>
-                  </li>
-                </ul>
-              </footer>
+              
             </div>
-            {/* Bootstrap core JavaScript
-              ================================================== */}
-            {/* Placed at the end of the document so the pages load faster */}
-          </div>
-          
+            <footer>
+            <p></p>
+            </footer>
+        </div>  
        )
     }
 

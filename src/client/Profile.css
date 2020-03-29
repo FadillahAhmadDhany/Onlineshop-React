@@ -68,10 +68,17 @@ body {
   color: white;
 }
 
-.card-header {
+.card-0 {
   border: 0;
   border-radius: 0;
   background: -webkit-gradient(linear, left top, right top, from(#58cdff), to(#1ef7bd));
-  background: linear-gradient(to right, #9b58ff, #81c4a7);
+  background: linear-gradient(to right, #5860ff, #b184ff);
+
+}
+.card-1 {
+  border: 0;
+  border-radius: 0;
+  background: -webkit-gradient(linear, left top, right top, from(#58cdff), to(#1ef7bd));
+  background: linear-gradient(to right, #65c1fa, #5261ff);
 
 }

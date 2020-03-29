@@ -58,10 +58,10 @@ class Login extends Component {
 
   render(){
     return(
-      <div className="container" style={{width: 24 + "rem", paddingTop : 6 + '%'}}>
-        <div className="card-body">
-          <div className="# ">
-            <h2 className="#" style={{textAlign: "center"}}>Login User</h2>
+      <div className="container" style={{width: 24 + "rem", paddingTop : 10 + '%'}}>
+        <div className="card shadow">
+          <div className="card-header">
+            <h2 className="text-light" style={{textAlign: "center"}}>MonStore Login</h2>
           </div>
           <div className="card-body">
             <Toast id="message" autohide="false" title="informasi">
@@ -75,7 +75,7 @@ class Login extends Component {
                 value={this.state.password} onChange={this.bind}
                 required placeholder="Masukkan Password" />
                 
-              <button className="mt-2 btn btn-block btn-success" type="submit">
+              <button className="mt-2 btn btn-block btn-info" type="submit">
                 <span className="#"></span> Login
                 </button>
                 <Link to="/register">

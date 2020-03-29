@@ -160,7 +160,7 @@ class Admin extends Component {
             <div className="#">
               <div className="row">
                 <div className="col">
-                  <h2 className="#" style={{fontWeight:"600", textAlign:"center", fontSize:"35px"}} >Data Barang</h2>
+                  <h2 className="text-secondary" style={{fontWeight:"600", textAlign:"center", fontSize:"35px"}} >Data Barang</h2>
                 </div>
               </div>
               <div className="col-sm-3" style={{textAlign:"center"}}>

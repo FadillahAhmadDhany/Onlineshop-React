@@ -1,7 +1,7 @@
 import React,{Component} from "react";
 import axios from "axios";
 import $ from "jquery";
-import Image from '../image/foto1.png';
+
 import Modal from "../component/Modal";
 import Toast from "../component/Toast";
 import './Profile.css';
@@ -302,7 +302,8 @@ class Profiles extends Component {
                         <li className="list-group-item">
                           <button className="m-1 btn btn-sm btn-outline-success" onClick={() => this.Edit(item)}>
                             <span className="fa fa-edit">Edit</span>
-                          </button></li>
+                          </button>
+                        </li>
                       </ul>
                       );
                     })}
@@ -327,7 +328,7 @@ class Profiles extends Component {
                     return(
                       <div class="col-sm-5" style={{marginTop:"5%", marginLeft:"5%"}}>
                         <div class="card shadow" style={{ marginBottom: "20px"}}>
-                        <div class="card-header text-white bg-info " style={{ textAlign: "center"}}>
+                        <div class="card-header card-0 text-white bg-info " style={{ textAlign: "center"}}>
                          {item.judul}
                         </div>
                       <div class="card-body">

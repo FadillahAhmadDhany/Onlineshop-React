@@ -11,7 +11,8 @@ import Order from "./page/Order";
 import Product from "./client/Product";
 import Profiles from "./client/Profiles";
 import Register from "./client/Register";
-import CheckOut from "./client/CheckOut";
+import History from "./client/History";
+import Payment from "./client/Payment";
 
 
 class Main extends Component{
@@ -40,13 +41,17 @@ class Main extends Component{
                     <Navbar />
                     <Cart />
                 </Route>
-                <Route path="/check_out">
+                <Route path="/history">
                     <Navbar />
-                    <CheckOut />
+                    <History />
                 </Route>
                 <Route path="/Order">
                     <Navbar />
                     <Order />
+                </Route>
+                <Route path="/payment">
+                    <Navbar />
+                    <Payment />
                 </Route>
             </Switch>
         );
